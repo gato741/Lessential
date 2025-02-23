@@ -1,2 +1,3 @@
 ## Lessential
-best linux tool
+
+Basic Linux setup tool currently supporting Arch and Debian based distros, it will be improved every update
