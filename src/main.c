@@ -85,7 +85,7 @@ void input() {
 int main() {
 	printf(RED "MAKE SURE YOU ARE RUNNING THIS PROGRAM AS ROOT!" NL);
 	sleep(1);
-	system("clear");
+    system("clear");
     printf(MAGB BYEL "  Lessential  " NL2);
     usleep(500000);
     input();
