@@ -20,7 +20,7 @@ void setupArch() {
 	
 	/* Virtualbox setup */
 	system("pacman -S virtualbox virtualbox-host-modules-arch");
-	
+    
 	/* Cool apps (uncomment the ones you need) */
 	// system("paru -S vesktop-bin");
 	// system("pacman -S retroarch");
