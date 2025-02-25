@@ -44,7 +44,7 @@ void setupDebian() {
 	system("apt upgrade");
 	
 	/* Packages */
-	system("apt install nala git flatpak gimp htop vlc wget");
+	system("apt install -y nala git flatpak gimp htop vlc wget");
 	
 	/* Virtualbox setup */
 	system("wget https://download.virtualbox.org/virtualbox/7.1.6/virtualbox-7.1_7.1.6-167084~Debian~bookworm_amd64.deb");	
