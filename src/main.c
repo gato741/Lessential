@@ -6,6 +6,9 @@
 
 int distro;
 
+char pkgs[200];
+char cmd[225];
+
 void setupArch() {
 	/* PS1 */
 	system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
@@ -20,7 +23,10 @@ void setupArch() {
 	
 	/* Virtualbox setup */
 	system("pacman -S virtualbox virtualbox-host-modules-arch");
-    
+	
+	/* User packages */
+	system(cmd);
+	
 	/* Cool apps (uncomment the ones you need) */
 	// system("paru -S vesktop-bin");
 	// system("pacman -S retroarch");
@@ -45,6 +51,9 @@ void setupDebian() {
 	system("dpkg -i virtualbox-*");
 	system("apt install -f -y");
 	
+	/* User pkgs */
+	system(cmd);
+	
 	/* Flathub setup */
 	system("flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo");
 	/* Cool apps (uncomment the ones you need) */
@@ -56,11 +65,29 @@ void setupDebian() {
 	system("reboot");
 }
 
+void archPkgs() {
+	printf("Any additional packages you want to install? (make sure they are in the repos): " NL);
+	scanf("%[^\n]", pkgs);
+	getchar();
+	snprintf(cmd, sizeof(cmd), "pacman -S %s", pkgs);
+	
+	setupArch();
+}
+		
+void debianPkgs() {
+	printf("Any additional packages you want to install? (make sure they are in the repos): " NL);
+	scanf("%[^\n]", pkgs);
+	getchar();
+	snprintf(cmd, sizeof(cmd), "apt install -y %s", pkgs);
+	
+	setupDebian();
+}
+
 void inputEval() {
 	if (distro == 1) {
-		setupArch();
+		archPkgs();
 	} else if (distro == 2) {
-		setupDebian();
+		debianPkgs();
 	} else {
 		printf(RED "Invalid input!");
 	}
@@ -77,7 +104,8 @@ void input() {
 
     printf(RESET "> ");
     scanf(" %d", &distro); 
-    
+    getchar();
+
     inputEval();
     system("clear");
 }
