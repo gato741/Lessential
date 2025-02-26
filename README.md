@@ -7,3 +7,5 @@ Basic Linux setup tool currently supporting Arch and Debian based distros, it wi
 
 **Why C not Bash?**
 - Why not, I just like C ig
+
+### barely works btw
