@@ -14,7 +14,7 @@ void setupArch() {
 	system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
 	
 	/* Packages and Updates */
-	system("pacman -Syu git base-devel flatpak gimp htop vlc wget");
+	system("pacman -Syu git base-devel flatpak gimp htop vlc wget --noconfirm");
 	
 	/* Paru setup */
 	system("git clone https://aur.archlinux.org/paru-bin.git");
@@ -22,15 +22,10 @@ void setupArch() {
 	system("makepkg -si");
 	
 	/* Virtualbox setup */
-	system("pacman -S virtualbox virtualbox-host-modules-arch");
+	system("pacman -S virtualbox virtualbox-host-modules-arch --noconfirm");
 	
 	/* User packages */
 	system(cmd);
-	
-	/* Cool apps (uncomment the ones you need) */
-	// system("paru -S vesktop-bin");
-	// system("pacman -S retroarch");
-	// system("pacman -S dolphin-emu");
 	
 	system("reboot");
 }
@@ -40,8 +35,7 @@ void setupDebian() {
 	system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
 	
 	/* Updates */
-	system("apt update");
-	system("apt upgrade");
+	system("apt update && apt upgrade -y");
 	
 	/* Packages */
 	system("apt install -y nala git flatpak gimp htop vlc wget");
@@ -56,12 +50,27 @@ void setupDebian() {
 	
 	/* Flathub setup */
 	system("flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo");
-	/* Cool apps (uncomment the ones you need) */
 	
-	// system("flatpak install flathub dev.vencord.Vesktop");
-	// system("flatpak install flathub org.libretro.RetroArch");
-	// system("flatpak install flathub org.DolphinEmu.dolphin-emu");
+	system("reboot");
+}
+
+void setupFedora() {
+	/* PS1 */
+	system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
 	
+	/* Updates */
+	system("dnf upgrade -y --refresh");
+	
+	/* Packages */
+	system("dnf install -y git gimp htop vlc wget");
+	
+	/* Virtualbox setup */
+	system("wget https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1-7.1.6_167084_fedora40-1.x86_64.rpm");	
+	system("dnf install -y virtualbox-*");
+	
+	/* User pkgs */
+	system(cmd);
+		
 	system("reboot");
 }
 
@@ -69,7 +78,7 @@ void archPkgs() {
 	printf("Any additional packages you want to install? (make sure they are in the repos): " NL);
 	scanf("%[^\n]", pkgs);
 	getchar();
-	snprintf(cmd, sizeof(cmd), "pacman -S %s", pkgs);
+	snprintf(cmd, sizeof(cmd), "pacman -S %s --noconfirm", pkgs);
 	
 	setupArch();
 }
@@ -83,11 +92,22 @@ void debianPkgs() {
 	setupDebian();
 }
 
+void fedoraPkgs() {
+	printf("Any additional packages you want to install? (make sure they are in the repos): " NL);
+	scanf("%[^\n]", pkgs);
+	getchar();
+	snprintf(cmd, sizeof(cmd), "dnf install -y %s", pkgs);
+	
+	setupFedora();
+}
+
 void inputEval() {
 	if (distro == 1) {
 		archPkgs();
 	} else if (distro == 2) {
 		debianPkgs();
+	} else if (distro == 3) {
+		fedoraPkgs();
 	} else {
 		printf(RED "Invalid input!");
 	}
@@ -101,6 +121,9 @@ void input() {
 
     printf(RESET "2) ");
     printf(DEB "Debian" NL);
+
+	printf(RESET "3) ");
+	printf(BLUB "Fedora" NL);
 
     printf(RESET "> ");
     scanf(" %d", &distro); 
