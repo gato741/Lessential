@@ -10,8 +10,6 @@ char pkgs[200];
 char cmd[225];
 
 void setupArch() {
-        system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
-
         system("pacman -Syu git base-devel flatpak gimp htop vlc wget --noconfirm");
 
         system("git clone https://aur.archlinux.org/paru-bin.git");
@@ -28,8 +26,6 @@ void setupArch() {
 }
 
 void setupDebian() {
-        system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
-
         system("apt update && apt upgrade -y");
 
         system("apt install -y nala git flatpak gimp htop vlc wget");
@@ -48,8 +44,6 @@ void setupDebian() {
 }
 
 void setupFedora() {
-        system("echo \"PS1='\\w \$ '\" >> ~/.bashrc");
-
         system("dnf upgrade -y --refresh");
 
         system("dnf install -y git gimp htop vlc wget");
@@ -69,6 +63,8 @@ void archPkgs() {
         scanf("%[^\n]", pkgs);
         getchar();
         snprintf(cmd, sizeof(cmd), "pacman -S %s --noconfirm", pkgs);
+
+        setupArch();
 }
 
 void debianPkgs() {
