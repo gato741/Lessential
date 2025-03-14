@@ -1,3 +1,5 @@
+/* added this comment bc im too lazy to actually develop something rn and i just want that green square */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
