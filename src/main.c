@@ -128,4 +128,4 @@ int main() {
         return 0;
 }
 
-// Kotok7 doesnt know how to code without ai 🔥🔥🔥
+// Kotok7 doesnt know how to code without ai lol
