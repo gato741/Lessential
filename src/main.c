@@ -10,7 +10,7 @@ char pkgs[200];
 char cmd[225];
 
 void setupArch() {
-        system("pacman -Syu git base-devel flatpak gimp htop vlc wget --noconfirm");
+        system("pacman -Syu git base-devel flatpak htop wget --noconfirm");
 
         system("git clone https://aur.archlinux.org/paru-bin.git");
         system("cd paru-bin");
@@ -28,7 +28,7 @@ void setupArch() {
 void setupDebian() {
         system("apt update && apt upgrade -y");
 
-        system("apt install -y nala git flatpak gimp htop vlc wget");
+        system("apt install -y nala git flatpak htop wget");
 
         system("wget https://download.virtualbox.org/virtualbox/7.1.6/virtualbox-7.1_7.1.6-167084~Debian~bookworm_amd64.deb");
         system("dpkg -i virtualbox-*");
@@ -46,7 +46,7 @@ void setupDebian() {
 void setupFedora() {
         system("dnf upgrade -y --refresh");
 
-        system("dnf install -y git gimp htop vlc wget");
+        system("dnf install -y git htop wget");
 
         system("wget https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1-7.1.6_167084_fedora40-1.x86_64.rpm");
         system("dnf install -y virtualbox-*");
@@ -127,3 +127,5 @@ int main() {
 
         return 0;
 }
+
+// Kotok7 doesnt know how to code without ai lol
