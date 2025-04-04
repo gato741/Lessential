@@ -1,4 +1,5 @@
 #define RESET "\e[0m"
+#define NONE "\e[0m"
 
 #define BLK "\e[0;30m"
 #define RED "\e[0;31m"
