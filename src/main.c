@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-              
+#include <unistd.h>     
 #include "newlines.h"
 #include "colors.h"
 
@@ -128,5 +127,3 @@ int main() {
 
         return 0;
 }
-
-// Kotok7 doesnt know how to code without ai lol
